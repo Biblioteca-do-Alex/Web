@@ -1,0 +1,67 @@
+.login {
+  position: relative;
+  top: 6rem;
+  border: solid 0.1rem #9433a3;
+  border-radius: 30px;
+  padding: 3rem 2rem;
+  margin: auto;
+  width: 40%;
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+.titulo {
+  font-size: 2.5rem;
+  color: #b531ca;
+}
+.input {
+  width: 90%;
+  height: 1.8rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.7rem;
+  border-radius: 7px;
+  border: solid #9433a3 0.1rem;
+  background-color: #f9f9f9;
+  padding: 0.1rem 0.6rem;
+}
+.input:focus {
+  outline: none;
+  border-color: #b531ca;
+  box-shadow: 0 0 5px #c93fde56;
+}
+input::placeholder {
+  color: #acacac;
+  font-style: italic;
+}
+.label {
+  color: #303030;
+}
+.olho {
+  width: 7%;
+  margin-bottom: 0.2rem;
+}
+.senha {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.olho {
+  position: absolute;
+  right: 1.7rem;
+  bottom: 0.9rem;
+  width: 1.3rem;
+  cursor: pointer;
+}
+.erro {
+  border-color: rgb(223, 14, 14);
+  box-shadow: 0 0 5px rgba(223, 14, 14, 0.34);
+}
