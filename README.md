@@ -1,27 +1,38 @@
-# Biblioteca do Alex -> Página Web
-> Repositório que contém os Arquivos utilizados no desenvolvimento da página web da Biblioteca do Alex
+# Biblioteca do Alex -> Web - Front do projeto
+
+> Repositório que contém toda parte do front-end do projeto
 
 ### Ajustes e melhorias
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas para as seguintes tarefas:
 
-- [x] Criação Do Script
+- [] Criação de todas as telas
+- [] Criação de componenetes
+- [] Fazer as requisições na api
+- [] Renderizar as telas de forma dinâmica
+- [] Implementar corretamente as funcionalidades assíncronas
 
 ## 💻 Tecnologias Utilizadas
 
-Confira as principais Linguagens, Frameworks e Bancos de Dados usados:
+Confira as principais Linguagens e Frameworks usados:
 
 - React
+- JS
+- HTML
+- CSS
+- Axios
+- useState, useEffect, BrowserRouter
 
 ## 🤝 Colaboradores
 
 Nossos colaboradores do Projeto são:
+
 - <a href="https://github.com/nicolasruoco">Nícolas Albano</a>
-- <a href="https://github.com/ArturCassu">Ana Beatriz Romera</a>
-- <a href="">Samira de Souza</a>
+- <a href="https://github.com/AnaBeatrizRomera">Ana Beatriz Romera</a>
+- <a href="https://github.com/SamiraSouza07">Samira de Souza</a>
 - [Se mais alguém ajudar nessa etapa, se adicionem pf!!]
 
-## 👍 Commits Semânticos 
+## 👍 Commits Semânticos
 
 Por favor, lembre de usar a padronização abaixo para realizar seus commits!
 
