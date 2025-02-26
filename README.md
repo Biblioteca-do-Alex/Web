@@ -12,6 +12,10 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [] Renderizar as telas de forma dinâmica
 - [] Implementar corretamente as funcionalidades assíncronas
 
+Para ter uma visão final do projeto mesmo ele não estando completamente pronto, pode dar uma olhada no nosso Figma:
+
+- <a href="https://www.figma.com/design/mPS1cdV9GxT3JS8rR1DIe5/Biblioteca-Alex?node-id=0-1&t=2TiFiGA7OYznqrny-1" target="_blank">Figma do Front</a>
+
 ## 💻 Tecnologias Utilizadas
 
 Confira as principais Linguagens e Frameworks usados:
@@ -27,9 +31,9 @@ Confira as principais Linguagens e Frameworks usados:
 
 Nossos colaboradores do Projeto são:
 
-- <a href="https://github.com/nicolasruoco">Nícolas Albano</a>
-- <a href="https://github.com/AnaBeatrizRomera">Ana Beatriz Romera</a>
-- <a href="https://github.com/SamiraSouza07">Samira de Souza</a>
+- <a href="https://github.com/nicolasruoco" target="_blank">Nícolas Albano</a>
+- <a href="https://github.com/AnaBeatrizRomera" target="_blank">Ana Beatriz Romera</a>
+- <a href="https://github.com/SamiraSouza07" target="_blank">Samira de Souza</a>
 - [Se mais alguém ajudar nessa etapa, se adicionem pf!!]
 
 ## 👍 Commits Semânticos
