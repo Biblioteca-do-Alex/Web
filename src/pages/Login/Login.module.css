@@ -43,10 +43,6 @@ input::placeholder {
 .label {
   color: #303030;
 }
-.olho {
-  width: 7%;
-  margin-bottom: 0.2rem;
-}
 .senha {
   width: 100%;
   display: flex;
@@ -57,7 +53,7 @@ input::placeholder {
 .olho {
   position: absolute;
   right: 1.7rem;
-  bottom: 0.9rem;
+  bottom: 1.1rem;
   width: 1.3rem;
   cursor: pointer;
 }

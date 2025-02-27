@@ -69,6 +69,7 @@ function Login(props) {
             if (data != null) {
               props.setLogado(true);
               props.setAdmin(false);
+              props.setUserId("1234")
             } else {
               alert("Erro ao efetuar login");
             }
