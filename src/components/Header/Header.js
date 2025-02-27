@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
 import logo from "../../assets/logo-branca.png";
@@ -6,36 +6,63 @@ import gatoService from "../../services/gatoService";
 
 function Header(props) {
   const [selecionado, setSelecionado] = useState("Livros");
-  const [fotoGato, setFotoGato] = useState(
-    "https://www.petz.com.br/blog/wp-content/uploads/2019/07/vida-de-gato.jpg"
-  );
+  const [fotoGato, setFotoGato] = useState("");
+  const [mostrarDropdown, setMostrarDropdown] = useState(false);
+  const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
   function mudarSelecao(texto) {
-    setSelecionado(texto);
-    if (texto === "Livros") {
-      navigate("/"); //
-    } else if (texto == "Empréstimos") {
-      navigate("/emprestimos");
+    if (texto === "Cadastros") {
+      setMostrarDropdown(!mostrarDropdown);
+      setSelecionado("Cadastros"); 
     } else {
-      navigate("/cadastros");
+      setSelecionado(texto);
+      setMostrarDropdown(false); 
+      navigate(texto === "Livros" ? "/" : "/emprestimos");
     }
+  }
+
+  function navegarPara(pagina) {
+    navigate(pagina);
+    setMostrarDropdown(false); 
   }
 
   function admin() {
     if (props.admin) {
       return (
-        <p
-          className={`${styles.textoHeader} ${
-            selecionado === "Cadastros" ? styles.selecionado : ""
-          }`}
-          onClick={() => mudarSelecao("Cadastros")}
-        >
-          Cadastros
-        </p>
+        <div className={styles.containerDropdown} ref={dropdownRef}>
+          <p
+            className={`${styles.textoHeader} ${
+              selecionado === "Cadastros" ? styles.selecionado : ""
+            }`}
+            onClick={() => mudarSelecao("Cadastros")}
+          >
+            Cadastros
+          </p>
+
+          {mostrarDropdown && (
+            <div className={styles.dropdown}>
+              <p onClick={() => navegarPara("/cadastros/livros")}>Livro</p>
+              <p onClick={() => navegarPara("/cadastros/exemplares")}>Exemplar</p>
+            </div>
+          )}
+        </div>
       );
     }
   }
+
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setMostrarDropdown(false);
+        if (selecionado === "Cadastros") setSelecionado("");
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [selecionado]);
 
   const fetchFotoGato = async () => {
     try {
@@ -49,6 +76,7 @@ function Header(props) {
       console.log("Erro ao comunicar com o servidor");
     }
   };
+
   useEffect(() => {
     fetchFotoGato();
   }, []);
@@ -81,7 +109,19 @@ function Header(props) {
           </p>
           {admin()}
         </div>
-        <img className={styles.gato} src={fotoGato} alt="" />
+        <img
+          className={styles.gato}
+          src={fotoGato}
+          alt=""
+          onClick={() => {
+            const logout = window.confirm("Deseja fazer logout?");
+            if (logout) {
+              props.setLogado(false);
+            } else {
+              window.open(fotoGato, "_blank");
+            }
+          }}
+        />
       </header>
     </>
   );

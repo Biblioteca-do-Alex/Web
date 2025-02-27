@@ -1,0 +1,57 @@
+.livro {
+  width: 10rem;
+  position: relative;
+  border-radius: 7px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.foto {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 7px;
+  margin: 0;
+  padding: 0;
+}
+
+.livro:hover .foto {
+  transform: scale(1.05);
+  opacity: 0.3;
+  transition: all 0.4s;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: all 0.2s;
+}
+
+.nome {
+  font-weight: 500;
+  font-size: 100%;
+}
+
+.autor {
+  font-size: 80%;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.invisivel {
+  display: none;
+}
+
+.livro:hover .info,
+.info:hover {
+  opacity: 1;
+}
