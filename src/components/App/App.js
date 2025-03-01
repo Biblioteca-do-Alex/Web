@@ -10,15 +10,14 @@ import Login from "../../pages/Login/Login";
 import DetalheLivro from "../../pages/DetalheLivro/DetalheLivro";
 
 function App() {
+  const [tituloPagina, setTituloPagina] = useState("Biblioteca do Alex");
   const [logado, setLogado] = useState(false);
   const [admin, setAdmin] = useState(true);
   const [userId, setUserId] = useState("");
 
   useEffect(() => {
-    window.onload = () => {
-      setLogado(true);
-    };
-  }, []);
+    document.getElementById("tituloPagina").textContent = tituloPagina;
+  }, [tituloPagina]);
 
   if (logado) {
     return (
@@ -35,7 +34,13 @@ function App() {
     );
   } else {
     return (
-      <Login setLogado={setLogado} setAdmin={setAdmin} setUserId={setUserId} />
+      <Login
+        setLogado={setLogado}
+        admin={admin}
+        setAdmin={setAdmin}
+        setUserId={setUserId}
+        setTituloPagina={setTituloPagina}
+      />
     );
   }
 }

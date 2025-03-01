@@ -52,7 +52,7 @@ input::placeholder {
 }
 .olho {
   position: absolute;
-  right: 1.7rem;
+  right: 7%;
   bottom: 1.1rem;
   width: 1.3rem;
   cursor: pointer;
