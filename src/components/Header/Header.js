@@ -11,13 +11,6 @@ function Header(props) {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    window.onload = () => {
-      setSelecionado("Livros");
-      navigate("/");
-    };
-  }, []);
-
   function mudarSelecao(texto) {
     if (texto === "Cadastros") {
       setMostrarDropdown(!mostrarDropdown);

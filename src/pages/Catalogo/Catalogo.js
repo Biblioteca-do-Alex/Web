@@ -47,7 +47,7 @@ function Catalogo() {
       return (
         <>
           <GrupoLivros
-            titulo={`Resultado da pesquisa ${busca}`}
+            titulo={`Resultado da pesquisa '${busca}'`}
             mensagem={`Não foi possível encontrar livros com o nome '${busca}'`}
             livros={catalogo.filter(
               (livro) =>

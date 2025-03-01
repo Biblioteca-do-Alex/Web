@@ -71,6 +71,9 @@ function Login(props) {
               setSenha("");
               props.setLogado(true);
               // props.setAdmin(false);
+              if (props.admin) {
+                props.setTituloPagina("Biblioteca do Alex Admin");
+              }
               props.setUserId("1234");
             } else {
               alert("Erro ao efetuar login");
