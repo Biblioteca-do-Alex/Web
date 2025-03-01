@@ -1,9 +1,16 @@
 import styles from "./BotaoPequeno.module.css";
+import { useNavigate } from "react-router-dom";
 
 function BotaoPequeno(props) {
-  return <>
-  <button className={styles.botao}>{props.texto}</button>
-  </>;
+  const navigate = useNavigate();
+  return (
+    <button
+      className={styles.botao}
+      onClick={() => navigate(`/livro/${props.id}`)}
+    >
+      {props.texto}
+    </button>
+  );
 }
 
 export default BotaoPequeno;

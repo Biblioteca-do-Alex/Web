@@ -67,15 +67,19 @@ function Login(props) {
           setTimeout(() => {
             setCarregar(false);
             if (data != null) {
+              setEmail("");
+              setSenha("");
               props.setLogado(true);
-              props.setAdmin(false);
-              props.setUserId("1234")
+              // props.setAdmin(false);
+              props.setUserId("1234");
             } else {
               alert("Erro ao efetuar login");
+              setCarregar(false);
             }
           }, 3000);
         } catch (error) {
           alert("Erro ao comunicar com o servidor");
+          setCarregar(false);
         }
       };
       fetchLogin();
@@ -96,6 +100,7 @@ function Login(props) {
             type="email"
             name="email"
             id="email"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <label className={styles.label} htmlFor="senha">
@@ -108,6 +113,7 @@ function Login(props) {
               type={tipo}
               name="senha"
               id="senha"
+              value={senha}
               onChange={(e) => setSenha(e.target.value)}
             />
             <img

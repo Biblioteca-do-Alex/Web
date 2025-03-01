@@ -10,7 +10,7 @@ function LivroIcone(props) {
         <div className={styles.info}>
           <p className={styles.nome}>{props.nome}</p>
           <p className={styles.autor}>{props.autor}</p>
-         <BotaoPequeno texto="Ver"/>
+         <BotaoPequeno texto="Ver" id={props.id}/>
         </div>
       </div>
     </>

@@ -7,22 +7,16 @@ import Emprestimos from "../../pages/Emprestimos/Emprestimos";
 import Livros from "../../pages/Cadastros/Livros/Livros";
 import Exemplares from "../../pages/Cadastros/Exemplares/Exemplares";
 import Login from "../../pages/Login/Login";
+import DetalheLivro from "../../pages/DetalheLivro/DetalheLivro";
 
 function App() {
-  const [logado, setLogado] = useState(true);
+  const [logado, setLogado] = useState(false);
   const [admin, setAdmin] = useState(true);
-  const [userId,setUserId] = useState("")
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === "F5" || (event.ctrlKey && event.key === "r")) {
-        event.preventDefault();
-        setLogado(true);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+    window.onload = () => {
+      setLogado(true);
     };
   }, []);
 
@@ -35,11 +29,14 @@ function App() {
           <Route path="/emprestimos" element={<Emprestimos />} />
           <Route path="/cadastros/livros" element={<Livros />} />
           <Route path="/cadastros/exemplares" element={<Exemplares />} />
+          <Route path="/livro/:id" element={<DetalheLivro />} />
         </Routes>
       </Router>
     );
   } else {
-    return <Login setLogado={setLogado} setAdmin={setAdmin} setUserId={setUserId} />;
+    return (
+      <Login setLogado={setLogado} setAdmin={setAdmin} setUserId={setUserId} />
+    );
   }
 }
 
