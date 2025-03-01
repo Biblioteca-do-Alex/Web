@@ -11,20 +11,27 @@ function Header(props) {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    window.onload = () => {
+      setSelecionado("Livros");
+      navigate("/");
+    };
+  }, []);
+
   function mudarSelecao(texto) {
     if (texto === "Cadastros") {
       setMostrarDropdown(!mostrarDropdown);
-      setSelecionado("Cadastros"); 
+      setSelecionado("Cadastros");
     } else {
       setSelecionado(texto);
-      setMostrarDropdown(false); 
+      setMostrarDropdown(false);
       navigate(texto === "Livros" ? "/" : "/emprestimos");
     }
   }
 
   function navegarPara(pagina) {
     navigate(pagina);
-    setMostrarDropdown(false); 
+    setMostrarDropdown(false);
   }
 
   function admin() {
@@ -43,14 +50,15 @@ function Header(props) {
           {mostrarDropdown && (
             <div className={styles.dropdown}>
               <p onClick={() => navegarPara("/cadastros/livros")}>Livro</p>
-              <p onClick={() => navegarPara("/cadastros/exemplares")}>Exemplar</p>
+              <p onClick={() => navegarPara("/cadastros/exemplares")}>
+                Exemplar
+              </p>
             </div>
           )}
         </div>
       );
     }
   }
-
 
   useEffect(() => {
     function handleClickOutside(event) {
