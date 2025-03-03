@@ -1,0 +1,49 @@
+.form {
+  margin: 1.5rem;
+  margin-top: 6rem;
+  display: flex;
+  flex-direction: column;
+}
+.form > h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.campos {
+  width: 80%;
+  margin: auto;
+  margin-bottom: 2rem;
+}
+.linha {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.grupo {
+  display: flex;
+  flex-direction: column;
+}
+
+.grupo > label {
+  color: #303030;
+  font-weight: 500;
+}
+.grupo > input,
+select {
+  width: 100%;
+  padding: 0 0.3rem;
+  height: 1.8rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.7rem;
+  border-radius: 5px;
+  border: solid #9433a3 1.4px;
+  background-color: #f9f9f9;
+}
+.grupo > input:focus,
+select:focus {
+  outline: none;
+  border-color: #b531ca;
+  box-shadow: 0 0 5px #c93fde56;
+}
+.botao{
+    margin:auto
+}

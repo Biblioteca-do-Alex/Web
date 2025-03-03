@@ -11,7 +11,7 @@ import DetalheLivro from "../../pages/DetalheLivro/DetalheLivro";
 
 function App() {
   const [tituloPagina, setTituloPagina] = useState("Biblioteca do Alex");
-  const [logado, setLogado] = useState(false);
+  const [logado, setLogado] = useState(true);
   const [admin, setAdmin] = useState(true);
   const [userId, setUserId] = useState("");
 
