@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import styles from "./Exemplares.module.css";
 import BotaoMedio from "../../../components/BotaoMedio/BotaoMedio";
 import Loading from "../../../components/Loading/Loading";
+import Alerta from "../../../components/Alerta/Alerta";
+
 function Exemplares(props) {
   const [identificador, setIdentificador] = useState("");
   const [ibsn, setIbsn] = useState("");
@@ -9,6 +11,7 @@ function Exemplares(props) {
   const [carregar, setCarregar] = useState(false);
   const [livros, setlivros] = useState([]);
   const [exemplar, setExemplar] = useState({});
+  const [alerta, setAlerta] = useState();
   useEffect(() => {
     const livro = [
       {
@@ -34,7 +37,10 @@ function Exemplares(props) {
   function criarExemplar() {
     let valido = true;
     if (identificador == "") {
-      alert("Digite o identificador do exemplar");
+      setAlerta({
+        mensagem: "Digite o identificador do exemplar",
+        tempo: 4000,
+      });
       valido = false;
     }
     if (valido) {
@@ -51,7 +57,7 @@ function Exemplares(props) {
       console.log(exemplar);
       setTimeout(() => {
         setCarregar(false);
-        alert("Emxemplar criado com sucesso");
+        setAlerta({ tipo: "success", mensagem: "Exemplar criado com sucesso" });
       }, 3000);
     }
   }
@@ -115,6 +121,7 @@ function Exemplares(props) {
         </div>
       </div>
       <Loading carregar={carregar} />
+      <Alerta alerta={alerta} />
     </>
   );
 }

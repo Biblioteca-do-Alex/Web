@@ -1,13 +1,13 @@
 .login {
   position: relative;
-  top: 6rem;
+  top: 2rem;
   border: solid 0.1rem #9433a3;
   border-radius: 30px;
-  padding: 3rem 2rem;
+  padding: 2.5rem 1.5rem;
   margin: auto;
   width: 40%;
   display: flex;
-  gap: 1.5rem;
+  gap: 1.3rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -43,13 +43,7 @@ input::placeholder {
 .label {
   color: #303030;
 }
-.senha {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-}
+
 .olho {
   position: absolute;
   right: 7%;
@@ -60,17 +54,4 @@ input::placeholder {
 .erro {
   border-color: rgb(223, 14, 14);
   box-shadow: 0 0 5px rgba(223, 14, 14, 0.34);
-}
-.texto {
-  font-weight: 400;
-  font-size: 0.9rem;
-}
-.texto > span {
-  text-decoration: underline;
-  font-weight: 500;
-}
-.texto > span:hover {
-  font-size: 1rem;
-  transition: all .2s;
-  cursor: pointer;
 }

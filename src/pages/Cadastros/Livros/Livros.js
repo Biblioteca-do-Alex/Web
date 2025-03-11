@@ -2,6 +2,7 @@ import styles from "./Livros.module.css";
 import BotaoMedio from "../../../components/BotaoMedio/BotaoMedio";
 import { use, useState } from "react";
 import Loading from "../../../components/Loading/Loading";
+import Alerta from "../../../components/Alerta/Alerta";
 
 function Livros(props) {
   const [carregar, setCarregar] = useState(false);
@@ -15,41 +16,45 @@ function Livros(props) {
   const [editora, setEditora] = useState("");
   const [imagem, setImagem] = useState("");
   const [livro, setLivro] = useState({});
+  const [alerta, setAlerta] = useState();
 
   function criarLivro() {
     let valido = true;
     if (ibsn == "") {
-      alert("Digite o IBSN do livro");
+      setAlerta({ mensagem: "Digite o IBSN do livro" });
       valido = false;
     }
     if (titulo == "") {
-      alert("Digite o Título do livro");
+      setAlerta({ mensagem: "Digite o Título do livro" });
       valido = false;
     }
     if (descricao == "") {
-      alert("Digite a Descrição do livro");
+      setAlerta({ mensagem: "Digite a Descrição do livro" });
       valido = false;
     }
     if (volume != "") {
       if (isNaN(volume)) {
-        alert("O volume deve ser apenas números");
+        setAlerta({
+          mensagem: "O volume deve conter apenas números",
+          tempo: 4000,
+        });
         valido = false;
       }
     }
     if (autor == "") {
-      alert("Digite o Autor do livro");
+      setAlerta({ mensagem: "Digite o Autor do livro" });
       valido = false;
     }
     if (genero == "") {
-      alert("Digite o Gênero do livro");
+      setAlerta({ mensagem: "Digite o Gênero do livro" });
       valido = false;
     }
     if (editora == "") {
-      alert("Digite a Editora do livro");
+      setAlerta({ mensagem: "Digite a Editora do livro" });
       valido = false;
     }
     if (imagem == "") {
-      alert("Anexe a Imagem do livro");
+      setAlerta({ mensagem: "Anexe a Imagem do livro" });
       valido = false;
     }
     if (valido) {
@@ -78,7 +83,7 @@ function Livros(props) {
       console.log(livro);
       setTimeout(() => {
         setCarregar(false);
-        alert("Livro criado com sucesso");
+        setAlerta({ tipo: "success", mensagem: "Livro criado com sucesso" });
       }, 3000);
     }
   }
@@ -239,6 +244,7 @@ function Livros(props) {
         </div>
       </div>
       <Loading carregar={carregar} />
+      <Alerta alerta={alerta} />
     </>
   );
 }

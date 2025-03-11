@@ -8,6 +8,8 @@ import Livros from "../../pages/Cadastros/Livros/Livros";
 import Exemplares from "../../pages/Cadastros/Exemplares/Exemplares";
 import Login from "../../pages/Login/Login";
 import DetalheLivro from "../../pages/DetalheLivro/DetalheLivro";
+import Usuario from "../../pages/Cadastros/Usuario/Usuario";
+import { Navigate } from "react-router-dom";
 
 function App() {
   const [tituloPagina, setTituloPagina] = useState("Biblioteca do Alex");
@@ -24,6 +26,8 @@ function App() {
       <Router>
         <Header admin={admin} setLogado={setLogado} />
         <Routes>
+          <Route path="/login" element={<Navigate to="/" replace />} />
+          <Route path="/cadastros/usuario" element={<Navigate to="/" replace />} />
           <Route path="/" admin={admin} element={<Catalogo />} />
           <Route path="/emprestimos" element={<Emprestimos />} />
           <Route path="/cadastros/livros" element={<Livros />} />
@@ -34,13 +38,26 @@ function App() {
     );
   } else {
     return (
-      <Login
-        setLogado={setLogado}
-        admin={admin}
-        setAdmin={setAdmin}
-        setUserId={setUserId}
-        setTituloPagina={setTituloPagina}
-      />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" replace />} />
+
+          <Route
+            path="/login"
+            element={
+              <Login
+                setLogado={setLogado}
+                admin={admin}
+                setAdmin={setAdmin}
+                setUserId={setUserId}
+                setTituloPagina={setTituloPagina}
+              />
+            }
+          />
+
+          <Route path="/cadastros/usuario" element={<Usuario />} />
+        </Routes>
+      </Router>
     );
   }
 }

@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
 import logo from "../../assets/logo-branca.png";
-import gatoService from "../../services/gatoService";
+import gatoService from "../../services/Gato/gatoService";
 
 function Header(props) {
   const [selecionado, setSelecionado] = useState("Livros");

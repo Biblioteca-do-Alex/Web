@@ -3,11 +3,48 @@ import Busca from "../../components/Busca/Busca";
 
 import { useState, useEffect } from "react";
 import GrupoLivros from "../../components/GrupoLivros/GrupoLivros";
+import generoService from "../../services/GeneroService";
+import livroService from "../../services/LivroService";
 
 function Catalogo() {
   const [busca, setBusca] = useState("");
   const [generos, setGeneros] = useState(["Romance", "Fantasia"]);
   const [catalogo, setCatalogo] = useState([]);
+
+  const fetchLivros = async () => {
+    try {
+      const data = await livroService.getLivros();
+      setTimeout(() => {
+        if (data != null) {
+          setCatalogo(data.livros);
+        } else {
+          alert("Não foi possível buscar os livros");
+        }
+      }, 3000);
+    } catch (error) {
+      alert("Erro ao comunicar com o servidor");
+    }
+  };
+
+  const fetchGeneros = async () => {
+    try {
+      const data = await generoService.getGeneros();
+      setTimeout(() => {
+        if (data != null) {
+          setGeneros(data.generos);
+        } else {
+          alert("Não foi possível buscar os gêneros");
+        }
+      }, 3000);
+    } catch (error) {
+      alert("Erro ao comunicar com o servidor");
+    }
+  };
+
+  // useEffect(() => {
+  //   fetchGeneros();
+  //   fetchLivros();
+  // }, []);
 
   useEffect(() => {
     const livro = [

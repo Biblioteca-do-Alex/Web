@@ -1,10 +1,10 @@
 import api from "./api";
 
-const authService = {
+const userService = {
   postLogin: async (data) => {
     const response = await api.post("/login", data);
     return response.data;
   }
 };
 
-export default authService;
+export default userService;
