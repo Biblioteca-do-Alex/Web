@@ -1,0 +1,59 @@
+.container {
+  border-bottom: 0.3rem solid;
+  min-width: 20%;
+  max-width: 30%;
+  min-height: 5%;
+  max-height: 30%;
+  padding: 1rem;
+  position: fixed;
+  right: 0.5rem;
+  top: 0.5rem;
+  z-index: 9999;
+  border-radius: 5px;
+  transition: display 0.5s ease-in-out;
+  display: flex;
+  justify-content: space-between;
+}
+.fechar {
+  width: 90%;
+}
+.fechar:hover {
+  opacity: 0.6;
+}
+.invisivel {
+  display: none;
+}
+.container > h2 {
+  margin-bottom: 0.5rem;
+}
+.mensagem {
+  word-wrap: break-word;
+  font-size: 0.9rem;
+}
+.error {
+  background-color: rgba(234, 13, 13, 0.9);
+  color: white;
+  border-color: rgb(149, 27, 27);
+}
+
+.error > .titulo::after {
+  content: "✖️";
+  margin-left: 0.4rem;
+}
+.warning {
+  background-color: rgba(222, 222, 58, 0.9);
+  border-color: rgb(158, 158, 31);
+}
+.warning > .titulo::after {
+  content: "⚠️";
+  margin-left: 0.4rem;
+}
+.success {
+  background-color: rgba(11, 140, 11, 0.9);
+  color: white;
+  border-color: rgb(6, 88, 6);
+}
+.success > .titulo::after {
+  content: "✅";
+  margin-left: 0.4rem;
+}

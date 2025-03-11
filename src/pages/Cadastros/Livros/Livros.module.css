@@ -71,9 +71,9 @@ textarea::placeholder {
   color: #acacac;
   font-style: italic;
 }
-.grupo>textarea{
-padding-top: .3rem;
+.grupo > textarea {
+  padding-top: 0.3rem;
 }
-.botao{
-    margin:auto
+.botao {
+  margin: auto;
 }

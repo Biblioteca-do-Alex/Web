@@ -1,11 +1,13 @@
 import styles from "./Login.module.css";
 import BotaoMedio from "../../components/BotaoMedio/BotaoMedio";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import olhoFechado from "../../assets/olho-fechado.svg";
 import olhoAberto from "../../assets/olho-aberto.svg";
 import validacoes from "../../utils/validacao";
 import Loading from "../../components/Loading/Loading";
 import authService from "../../services/authService";
+import { useNavigate } from "react-router-dom";
+import Alerta from "../../components/Alerta/Alerta";
 
 function Login(props) {
   const [visivel, setVisivel] = useState(false);
@@ -15,6 +17,8 @@ function Login(props) {
   const [email, setEmail] = useState("");
   const [erroEmail, setErroEmail] = useState(false);
   const [carregar, setCarregar] = useState(false);
+  const [alerta, setAlerta] = useState();
+  const navigate = useNavigate();
 
   function mostrarSenha() {
     setVisivel(!visivel);
@@ -28,14 +32,17 @@ function Login(props) {
       setTimeout(() => {
         setErroEmail(false);
       }, 6000);
-      alert("digite o email");
+      setAlerta({ mensagem: "Digite o e-mail", tempo: 4000 });
       valido = false;
     } else if (validacoes.validarEmail(email) == false) {
       setErroEmail(true);
       setTimeout(() => {
         setErroEmail(false);
       }, 6000);
-      alert("email invalido");
+      setAlerta({
+        mensagem: "Digite um e-mail válido",
+        tempo: 4000,
+      });
       valido = false;
     } else {
       setErroEmail(false);
@@ -46,14 +53,17 @@ function Login(props) {
       setTimeout(() => {
         setErroSenha(false);
       }, 6000);
-      alert("digite a senha");
+      setAlerta({ mensagem: "Digite a senha", tempo: 4000 });
       valido = false;
     } else if (senha.length <= 4) {
       setErroSenha(true);
       setTimeout(() => {
         setErroSenha(false);
       }, 6000);
-      alert("senha muito curta, deve ter pelo menos 5 caracteres");
+      setAlerta({
+        mensagem: "Senha muito curta, ela deve ter pelo menos 5 caracteres",
+        tempo: 5000,
+      });
       valido = false;
     } else {
       setErroSenha(false);
@@ -63,25 +73,36 @@ function Login(props) {
       setCarregar(true);
       const fetchLogin = async () => {
         try {
-          const data = await authService.getLogin();
+          const login = {
+            email: email,
+            senha: senha,
+          };
+          const data = await authService.postLogin(login);
           setTimeout(() => {
             setCarregar(false);
             if (data != null) {
               setEmail("");
               setSenha("");
               props.setLogado(true);
-              // props.setAdmin(false);
-              if (props.admin) {
+              if (data.admin) {
                 props.setTituloPagina("Biblioteca do Alex Admin");
               }
-              props.setUserId("1234");
+              props.setUserId(data.id);
             } else {
-              alert("Erro ao efetuar login");
+              setAlerta({
+                tipo: "error",
+                mensagem: "Erro ao efetuar login",
+                tempo: 4000,
+              });
               setCarregar(false);
             }
           }, 3000);
         } catch (error) {
-          alert("Erro ao comunicar com o servidor");
+          setAlerta({
+            tipo: "error",
+            mensagem: "Erro ao comunicar com o servidor",
+            tempo: 5000,
+          });
           setCarregar(false);
         }
       };
@@ -128,8 +149,19 @@ function Login(props) {
           </div>
         </div>
         <BotaoMedio texto="Acessar" onClick={validaDados} />
+        <p className={styles.texto}>
+          Não tem conta?{" "}
+          <span
+            onClick={(e) => {
+              navigate("/cadastros/usuario");
+            }}
+          >
+            Cadastre-se
+          </span>
+        </p>
       </div>
       <Loading carregar={carregar} />
+      <Alerta alerta={alerta} />
     </>
   );
 }
