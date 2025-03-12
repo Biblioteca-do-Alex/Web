@@ -87,7 +87,7 @@ function Login(props) {
               if (data.admin) {
                 props.setTituloPagina("Biblioteca do Alex Admin");
               }
-              props.setUserId(data.id);
+              props.setUsuario(data);
             } else {
               setAlerta({
                 tipo: "error",

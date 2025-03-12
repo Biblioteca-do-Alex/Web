@@ -6,6 +6,7 @@ import Alerta from "../../../components/Alerta/Alerta";
 
 function Exemplares(props) {
   const [identificador, setIdentificador] = useState("");
+  const [erroIdentificador, setErroIdentificador] = useState(false);
   const [ibsn, setIbsn] = useState("");
   const [status, setStatus] = useState("");
   const [carregar, setCarregar] = useState(false);
@@ -37,12 +38,19 @@ function Exemplares(props) {
   function criarExemplar() {
     let valido = true;
     if (identificador == "") {
+      setErroIdentificador(true);
+      setTimeout(() => {
+        setErroIdentificador(false);
+      }, 6000);
       setAlerta({
         mensagem: "Digite o identificador do exemplar",
         tempo: 4000,
       });
       valido = false;
+    } else {
+      setErroIdentificador(false);
     }
+
     if (valido) {
       setCarregar(true);
       const exemplar = {
@@ -76,6 +84,7 @@ function Exemplares(props) {
                 type="text"
                 name="identificador"
                 id="identificador"
+                className={`${erroIdentificador ? styles.erro : ""}`}
                 value={identificador}
                 onChange={(e) => {
                   setIdentificador(e.target.value);

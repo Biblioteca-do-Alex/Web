@@ -77,3 +77,12 @@ textarea::placeholder {
 .botao {
   margin: auto;
 }
+textarea {
+  min-height: 1.8rem;
+  max-width: 100%;
+  min-width: 100%;
+}
+.erro {
+  border-color: rgb(223, 14, 14) !important;
+  box-shadow: 0 0 5px rgba(223, 14, 14, 0.34);
+}

@@ -6,11 +6,11 @@
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas para as seguintes tarefas:
 
-- [] Criação de todas as telas
-- [] Criação de componenetes
-- [] Fazer as requisições na api
-- [] Renderizar as telas de forma dinâmica
-- [] Implementar corretamente as funcionalidades assíncronas
+- [ ] Criação de todas as telas
+- [ ] Criação de componenetes
+- [ ] Fazer as requisições na api
+- [ ] Renderizar as telas de forma dinâmica
+- [ ] Implementar corretamente as funcionalidades assíncronas
 
 Para ter uma visão final do projeto mesmo ele não estando completamente pronto, pode dar uma olhada no nosso Figma:
 

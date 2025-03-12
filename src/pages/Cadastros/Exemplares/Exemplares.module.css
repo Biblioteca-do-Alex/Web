@@ -44,6 +44,10 @@ select:focus {
   border-color: #b531ca;
   box-shadow: 0 0 5px #c93fde56;
 }
-.botao{
-    margin:auto
+.botao {
+  margin: auto;
+}
+.erro {
+  border-color: rgb(223, 14, 14) !important;
+  box-shadow: 0 0 5px rgba(223, 14, 14, 0.34);
 }

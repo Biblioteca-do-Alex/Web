@@ -15,7 +15,7 @@ function App() {
   const [tituloPagina, setTituloPagina] = useState("Biblioteca do Alex");
   const [logado, setLogado] = useState(true);
   const [admin, setAdmin] = useState(true);
-  const [userId, setUserId] = useState("");
+  const [usuario, setUsuario] = useState();
 
   useEffect(() => {
     document.getElementById("tituloPagina").textContent = tituloPagina;
@@ -24,10 +24,13 @@ function App() {
   if (logado) {
     return (
       <Router>
-        <Header admin={admin} setLogado={setLogado} />
+        <Header admin={admin} setLogado={setLogado} usuario={usuario} />
         <Routes>
           <Route path="/login" element={<Navigate to="/" replace />} />
-          <Route path="/cadastros/usuario" element={<Navigate to="/" replace />} />
+          <Route
+            path="/cadastros/usuario"
+            element={<Navigate to="/" replace />}
+          />
           <Route path="/" admin={admin} element={<Catalogo />} />
           <Route path="/emprestimos" element={<Emprestimos />} />
           <Route path="/cadastros/livros" element={<Livros />} />
@@ -49,7 +52,7 @@ function App() {
                 setLogado={setLogado}
                 admin={admin}
                 setAdmin={setAdmin}
-                setUserId={setUserId}
+                setUsuario={setUsuario}
                 setTituloPagina={setTituloPagina}
               />
             }

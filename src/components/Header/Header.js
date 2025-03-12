@@ -110,6 +110,7 @@ function Header(props) {
           </p>
           {admin()}
         </div>
+        <p className={styles.nome}>{props.usuario ? props.usuario.nome : ""}</p>
         <img
           className={styles.gato}
           src={fotoGato}
@@ -118,6 +119,7 @@ function Header(props) {
             const logout = window.confirm("Deseja fazer logout?");
             if (logout) {
               props.setLogado(false);
+              navegarPara("/");
             } else {
               window.open(fotoGato, "_blank");
             }

@@ -3,8 +3,8 @@ import Busca from "../../components/Busca/Busca";
 
 import { useState, useEffect } from "react";
 import GrupoLivros from "../../components/GrupoLivros/GrupoLivros";
-import generoService from "../../services/GeneroService";
-import livroService from "../../services/LivroService";
+import generoService from "../../services/generoService";
+import livroService from "../../services/livroService";
 
 function Catalogo() {
   const [busca, setBusca] = useState("");

@@ -78,3 +78,12 @@
   transition: all 0.5s;
   color: black;
 }
+.nome {
+  color: white;
+  text-align: end;
+  position: relative;
+  right: 0px;
+  top:0px;
+  width: 60%;
+  font-style: italic;
+}
