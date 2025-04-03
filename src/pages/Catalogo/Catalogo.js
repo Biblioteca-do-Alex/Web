@@ -83,7 +83,7 @@ function Catalogo() {
             mensagem={`Não foi possível encontrar livros com o nome '${busca}'`}
             livros={catalogo.filter(
               (livro) =>
-                livro.nome.toLowerCase().includes(busca.toLowerCase()) ||
+                livro.titulo.toLowerCase().includes(busca.toLowerCase()) ||
                 livro.autor.toLowerCase().includes(busca.toLowerCase()) ||
                 livro.colecao.toLowerCase().includes(busca.toLowerCase())
             )}
