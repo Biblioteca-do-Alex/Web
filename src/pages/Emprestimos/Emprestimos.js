@@ -111,7 +111,15 @@ function Emprestimos({ usuario }) {
   }, [usuario]);
 
   useEffect(() => {
-    setLivrosGeral([...new Set([...livrosReservas, ...livrosEmprestimos])]);
+    const livrosUnicos = [
+      ...new Map(
+        [...livrosReservas, ...livrosEmprestimos].map((livro) => [
+          livro.ibsn,
+          livro,
+        ])
+      ).values(),
+    ];
+    setLivrosGeral(livrosUnicos);
   }, [livrosEmprestimos, livrosReservas]);
 
   function retorno() {
@@ -134,7 +142,7 @@ function Emprestimos({ usuario }) {
       );
     } else {
       const livrosFiltrados = livrosGeral.filter((livro) =>
-        [livro.nome, livro.autor, livro.colecao].some((campo) =>
+        [livro.titulo, livro.autor, livro.colecao].some((campo) =>
           campo?.toLowerCase().includes(busca.toLowerCase())
         )
       );
