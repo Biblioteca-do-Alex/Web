@@ -7,6 +7,7 @@ const emprestimoService = {
     );
     return response.data;
   },
+  
 };
 
 export default emprestimoService;
