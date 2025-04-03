@@ -127,34 +127,34 @@ function Usuario(props) {
           const usuario = {
             nome: nome,
             endereco: endereco,
-            telefone: telefone,
+            telefone: validacoes.formatarTelefone(telefone),
             email: email,
             senha: senha,
           };
-          const data = await userService.postLogin(usuario);
-          setTimeout(() => {
-            setCarregar(false);
-            if (data != null) {
-              setAlerta({
-                tipo: "success",
-                mensagem: "Usuário cadastrado com sucesso",
-                tempo: 4000,
-              });
-              setNome("");
-              setEndereco("");
-              setTelefone("");
-              setEmail("");
-              setSenha("");
+          const data = await userService.postSalvar(usuario);
+          setCarregar(false);
+          if (data != null) {
+            setAlerta({
+              tipo: "success",
+              mensagem: "Usuário cadastrado com sucesso",
+              tempo: 4000,
+            });
+            setNome("");
+            setEndereco("");
+            setTelefone("");
+            setEmail("");
+            setSenha("");
+            setTimeout(() => {
               navigate("/login");
-            } else {
-              setAlerta({
-                tipo: "error",
-                mensagem: "Erro ao cadastrar usuário",
-                tempo: 3000,
-              });
-              setCarregar(false);
-            }
-          }, 3000);
+            }, 5000);
+          } else {
+            setAlerta({
+              tipo: "error",
+              mensagem: "Erro ao cadastrar usuário",
+              tempo: 3000,
+            });
+            setCarregar(false);
+          }
         } catch (error) {
           setAlerta({
             tipo: "error",

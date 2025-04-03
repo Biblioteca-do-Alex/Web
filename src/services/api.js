@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://api.thecatapi.com/v1',
+    baseURL: 'https://api-tz5d.onrender.com',
     headers: {
         'Content-Type': 'application/json',
     }

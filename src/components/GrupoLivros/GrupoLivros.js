@@ -9,10 +9,7 @@ function GrupoLivros(props) {
           {props.livros.map((livro) => (
             <LivroIcone
               key={livro.id}
-              nome={livro.nome}
-              autor={livro.autor}
-              foto={livro.foto}
-              id={livro.id}
+              livro={livro}
             />
           ))}
         </div>

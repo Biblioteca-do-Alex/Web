@@ -13,3 +13,8 @@ body {
   height: 0px;
   display: none;
 }
+:root{
+  --primary-color:#b531ca;
+  /* --second-color:;
+  --green:; */
+}

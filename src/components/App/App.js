@@ -13,9 +13,9 @@ import { Navigate } from "react-router-dom";
 
 function App() {
   const [tituloPagina, setTituloPagina] = useState("Biblioteca do Alex");
-  const [logado, setLogado] = useState(true);
-  const [admin, setAdmin] = useState(true);
-  const [userId, setUserId] = useState("");
+  const [logado, setLogado] = useState(false);
+  const [admin, setAdmin] = useState(false);
+  const [usuario, setUsuario] = useState();
 
   useEffect(() => {
     document.getElementById("tituloPagina").textContent = tituloPagina;
@@ -24,12 +24,15 @@ function App() {
   if (logado) {
     return (
       <Router>
-        <Header admin={admin} setLogado={setLogado} />
+        <Header admin={admin} setLogado={setLogado} usuario={usuario} />
         <Routes>
           <Route path="/login" element={<Navigate to="/" replace />} />
-          <Route path="/cadastros/usuario" element={<Navigate to="/" replace />} />
+          <Route
+            path="/cadastros/usuario"
+            element={<Navigate to="/" replace />}
+          />
           <Route path="/" admin={admin} element={<Catalogo />} />
-          <Route path="/emprestimos" element={<Emprestimos />} />
+          <Route path="/emprestimos" element={<Emprestimos usuario={usuario} />} />
           <Route path="/cadastros/livros" element={<Livros />} />
           <Route path="/cadastros/exemplares" element={<Exemplares />} />
           <Route path="/livro/:id" element={<DetalheLivro />} />
@@ -49,7 +52,7 @@ function App() {
                 setLogado={setLogado}
                 admin={admin}
                 setAdmin={setAdmin}
-                setUserId={setUserId}
+                setUsuario={setUsuario}
                 setTituloPagina={setTituloPagina}
               />
             }

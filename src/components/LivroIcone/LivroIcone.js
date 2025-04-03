@@ -5,12 +5,12 @@ function LivroIcone(props) {
   return (
     <>
       <div className={styles.livro}>
-        <img src={props.foto} alt="" className={styles.foto} />
-   
+        <img src={props.livro.imagem} alt="" className={styles.foto} />
+
         <div className={styles.info}>
-          <p className={styles.nome}>{props.nome}</p>
-          <p className={styles.autor}>{props.autor}</p>
-         <BotaoPequeno texto="Ver" id={props.id}/>
+          <p className={styles.nome}>{props.livro.titulo}</p>
+          <p className={styles.autor}>{props.livro.autor}</p>
+          <BotaoPequeno texto="Ver" id={props.livro.id} />
         </div>
       </div>
     </>

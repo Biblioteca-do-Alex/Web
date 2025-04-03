@@ -1,6 +1,5 @@
 import styles from "./Loading.module.css";
-import gif from "../../assets/loading2.gif";
-import { useState } from "react";
+import gif from "../../assets/loading.gif";
 
 function Loading(props) {
   return (

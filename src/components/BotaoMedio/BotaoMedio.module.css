@@ -3,7 +3,7 @@
     padding: .6rem 1rem;
     border-radius: 5px;
     border:none;
-    background-color: #B531CA;
+    background-color: var(--primary-color);
     color:#ffff;
     font-weight: 500;
     cursor: pointer;
