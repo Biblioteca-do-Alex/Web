@@ -62,7 +62,7 @@ textarea {
 .grupo > input[type="text"]:focus,
 textarea:focus {
   outline: none;
-  border-color: #b531ca;
+  border-color: var(--primary-color);
   box-shadow: 0 0 5px #c93fde56;
 }
 

@@ -5,67 +5,61 @@ import { useState, useEffect } from "react";
 import GrupoLivros from "../../components/GrupoLivros/GrupoLivros";
 import generoService from "../../services/generoService";
 import livroService from "../../services/livroService";
+import Alerta from "../../components/Alerta/Alerta";
+import Loading from "../../components/Loading/Loading";
 
 function Catalogo() {
   const [busca, setBusca] = useState("");
-  const [generos, setGeneros] = useState(["Romance", "Fantasia"]);
+  const [generos, setGeneros] = useState([]);
   const [catalogo, setCatalogo] = useState([]);
+  const [alerta, setAlerta] = useState();
+  const [carregar, setCarregar] = useState(false);
 
   const fetchLivros = async () => {
     try {
       const data = await livroService.getLivros();
-      setTimeout(() => {
-        if (data != null) {
-          setCatalogo(data.livros);
-        } else {
-          alert("Não foi possível buscar os livros");
-        }
-      }, 3000);
+      if (data != null) {
+        setCatalogo(data);
+      } else {
+        setAlerta({
+          tipo: "error",
+          mensagem: "Erro ao buscar livros",
+          tempo: 3000,
+        });
+      }
     } catch (error) {
-      alert("Erro ao comunicar com o servidor");
+      setAlerta({
+        tipo: "error",
+        mensagem: "Erro ao comunicar com o servidor",
+        tempo: 3000,
+      });
     }
   };
 
   const fetchGeneros = async () => {
     try {
       const data = await generoService.getGeneros();
-      setTimeout(() => {
-        if (data != null) {
-          setGeneros(data.generos);
-        } else {
-          alert("Não foi possível buscar os gêneros");
-        }
-      }, 3000);
+      if (data != null) {
+        setGeneros(data);
+        fetchLivros();
+      } else {
+        setAlerta({
+          tipo: "error",
+          mensagem: "Erro ao buscar gêneros",
+          tempo: 3000,
+        });
+      }
     } catch (error) {
-      alert("Erro ao comunicar com o servidor");
+      setAlerta({
+        tipo: "error",
+        mensagem: "Erro ao comunicar com o servidor",
+        tempo: 3000,
+      });
     }
   };
 
-  // useEffect(() => {
-  //   fetchGeneros();
-  //   fetchLivros();
-  // }, []);
-
   useEffect(() => {
-    const livro = [
-      {
-        id: "1234",
-        nome: "A Hipótese do Amor",
-        autor: "Ali Hazelwood",
-        colecao: "",
-        genero: "Romance",
-        foto: "https://m.media-amazon.com/images/I/71dsFCsDGYL._UF894,1000_QL80_.jpg",
-      },
-      {
-        id: "4321",
-        nome: "Harry Potter",
-        autor: "J.K. Rowling",
-        colecao: "Magia",
-        genero: "Fantasia",
-        foto: "https://m.media-amazon.com/images/I/81ibfYk4qmL.jpg",
-      },
-    ];
-    setCatalogo(livro);
+    fetchGeneros();
   }, []);
 
   function retorno() {
@@ -74,8 +68,9 @@ function Catalogo() {
         <>
           {generos.map((genero) => (
             <GrupoLivros
-              titulo={genero}
-              livros={catalogo.filter((livro) => livro.genero == genero)}
+              key={genero.id}
+              titulo={genero.nome}
+              livros={catalogo.filter((livro) => livro.genero == genero.id)}
             />
           ))}
         </>
@@ -102,6 +97,8 @@ function Catalogo() {
     <div className={styles.container}>
       <Busca busca={busca} setBusca={setBusca} />
       {retorno()}
+      <Alerta alerta={alerta} />
+      <Loading carregar={carregar} />
     </div>
   );
 }

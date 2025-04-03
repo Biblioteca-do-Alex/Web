@@ -110,7 +110,8 @@ function Header(props) {
           </p>
           {admin()}
         </div>
-        <p className={styles.nome}>{props.usuario ? props.usuario.nome : ""}</p>
+        <div className={styles.containerFinal}>
+        <p className={styles.nome}>{props.usuario ? props.usuario.nome : "Sem nome"}</p>
         <img
           className={styles.gato}
           src={fotoGato}
@@ -125,6 +126,7 @@ function Header(props) {
             }
           }}
         />
+        </div>
       </header>
     </>
   );

@@ -19,7 +19,7 @@
 }
 .titulo {
   font-size: 2.5rem;
-  color: #b531ca;
+  color: var(--primary-color);
 }
 .input {
   width: 90%;
@@ -33,7 +33,7 @@
 }
 .input:focus {
   outline: none;
-  border-color: #b531ca;
+  border-color: var(--primary-color);
   box-shadow: 0 0 5px #c93fde56;
 }
 input::placeholder {

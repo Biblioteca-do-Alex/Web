@@ -41,7 +41,7 @@ select {
 .grupo > input:focus,
 select:focus {
   outline: none;
-  border-color: #b531ca;
+  border-color: var(--primary-color);
   box-shadow: 0 0 5px #c93fde56;
 }
 .botao {

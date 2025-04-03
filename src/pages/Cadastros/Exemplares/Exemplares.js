@@ -3,6 +3,8 @@ import styles from "./Exemplares.module.css";
 import BotaoMedio from "../../../components/BotaoMedio/BotaoMedio";
 import Loading from "../../../components/Loading/Loading";
 import Alerta from "../../../components/Alerta/Alerta";
+import exemplarService from "../../../services/exemplarService";
+import livroService from "../../../services/livroService";
 
 function Exemplares(props) {
   const [identificador, setIdentificador] = useState("");
@@ -11,28 +13,33 @@ function Exemplares(props) {
   const [status, setStatus] = useState("");
   const [carregar, setCarregar] = useState(false);
   const [livros, setlivros] = useState([]);
-  const [exemplar, setExemplar] = useState({});
   const [alerta, setAlerta] = useState();
+
+  const fetchLivros = async () => {
+    setCarregar(true);
+    try {
+      const data = await livroService.getLivros();
+      setCarregar(false);
+      if (data != null) {
+        setlivros(data);
+      } else {
+        setAlerta({
+          tipo: "error",
+          mensagem: "Erro ao buscar livros",
+          tempo: 3000,
+        });
+      }
+    } catch (error) {
+      setAlerta({
+        tipo: "error",
+        mensagem: "Erro ao comunicar com o servidor",
+        tempo: 3000,
+      });
+    }
+  };
+
   useEffect(() => {
-    const livro = [
-      {
-        id: "1234",
-        nome: "Harry Potter",
-      },
-      {
-        id: "5432",
-        nome: "A teoria de tudo",
-      },
-      {
-        id: "0987",
-        nome: "Como eu era antes de você",
-      },
-      {
-        id: "98765",
-        nome: "Trono de vidro",
-      },
-    ];
-    setlivros(livro);
+    fetchLivros();
   }, []);
 
   function criarExemplar() {
@@ -53,20 +60,42 @@ function Exemplares(props) {
 
     if (valido) {
       setCarregar(true);
-      const exemplar = {
-        identificador: identificador,
-        ibsn: ibsn,
-        status: status,
+      const fetchExemplar = async () => {
+        try {
+          const exemplar = {
+            identificador: identificador,
+            ibsn: ibsn,
+            status: status,
+          };
+          const data = await exemplarService.postSalvar(exemplar);
+          setCarregar(false);
+          if (data != null) {
+            setAlerta({
+              tipo: "success",
+              mensagem: "Exemplar cadastrado com sucesso",
+              tempo: 4000,
+            });
+            setIdentificador("");
+            setIbsn("");
+            setStatus("");
+          } else {
+            setAlerta({
+              tipo: "error",
+              mensagem: "Erro ao cadastrar exemplar",
+              tempo: 3000,
+            });
+            setCarregar(false);
+          }
+        } catch (error) {
+          setAlerta({
+            tipo: "error",
+            mensagem: "Erro ao comunicar com o servidor",
+            tempo: 3000,
+          });
+          setCarregar(false);
+        }
       };
-      setExemplar(exemplar);
-      setIdentificador("");
-      setIbsn("");
-      setStatus("");
-      console.log(exemplar);
-      setTimeout(() => {
-        setCarregar(false);
-        setAlerta({ tipo: "success", mensagem: "Exemplar criado com sucesso" });
-      }, 3000);
+      fetchExemplar();
     }
   }
 
@@ -102,9 +131,9 @@ function Exemplares(props) {
                 }}
               >
                 {livros
-                  .sort((a, b) => a.nome.localeCompare(b.nome))
+                  .sort((a, b) => a.titulo.localeCompare(b.titulo))
                   .map((livro) => (
-                    <option value={livro.id}>{livro.nome}</option>
+                    <option value={livro.id}>{livro.titulo}</option>
                   ))}
               </select>
             </div>

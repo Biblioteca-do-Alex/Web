@@ -13,8 +13,8 @@ import { Navigate } from "react-router-dom";
 
 function App() {
   const [tituloPagina, setTituloPagina] = useState("Biblioteca do Alex");
-  const [logado, setLogado] = useState(true);
-  const [admin, setAdmin] = useState(true);
+  const [logado, setLogado] = useState(false);
+  const [admin, setAdmin] = useState(false);
   const [usuario, setUsuario] = useState();
 
   useEffect(() => {
@@ -32,7 +32,7 @@ function App() {
             element={<Navigate to="/" replace />}
           />
           <Route path="/" admin={admin} element={<Catalogo />} />
-          <Route path="/emprestimos" element={<Emprestimos />} />
+          <Route path="/emprestimos" element={<Emprestimos usuario={usuario} />} />
           <Route path="/cadastros/livros" element={<Livros />} />
           <Route path="/cadastros/exemplares" element={<Exemplares />} />
           <Route path="/livro/:id" element={<DetalheLivro />} />

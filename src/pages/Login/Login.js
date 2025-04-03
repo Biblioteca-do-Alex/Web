@@ -5,9 +5,9 @@ import olhoFechado from "../../assets/olho-fechado.svg";
 import olhoAberto from "../../assets/olho-aberto.svg";
 import validacoes from "../../utils/validacao";
 import Loading from "../../components/Loading/Loading";
-import authService from "../../services/authService";
 import { useNavigate } from "react-router-dom";
 import Alerta from "../../components/Alerta/Alerta";
+import userService from "../../services/userService";
 
 function Login(props) {
   const [visivel, setVisivel] = useState(false);
@@ -26,6 +26,7 @@ function Login(props) {
   }
 
   function validaDados() {
+    setCarregar(true);
     let valido = true;
     if (email == "") {
       setErroEmail(true);
@@ -70,33 +71,35 @@ function Login(props) {
     }
 
     if (valido) {
-      setCarregar(true);
       const fetchLogin = async () => {
         try {
           const login = {
             email: email,
             senha: senha,
           };
-          const data = await authService.postLogin(login);
+          const data = await userService.postLogin(login);
           setTimeout(() => {
             setCarregar(false);
-            if (data != null) {
-              setEmail("");
-              setSenha("");
-              props.setLogado(true);
-              if (data.admin) {
-                props.setTituloPagina("Biblioteca do Alex Admin");
-              }
-              props.setUsuario(data);
-            } else {
-              setAlerta({
-                tipo: "error",
-                mensagem: "Erro ao efetuar login",
-                tempo: 4000,
-              });
-              setCarregar(false);
+          }, 2000);
+          if (data != null) {
+            setEmail("");
+            setSenha("");
+            if (data.role == "ADMIN") {
+              props.setTituloPagina("Biblioteca do Alex Admin");
+              props.setAdmin(true);
             }
-          }, 3000);
+            setTimeout(() => {
+              props.setLogado(true);
+              props.setUsuario(data);
+            }, 1000);
+          } else {
+            setAlerta({
+              tipo: "error",
+              mensagem: "Erro ao efetuar login",
+              tempo: 4000,
+            });
+            setCarregar(false);
+          }
         } catch (error) {
           setAlerta({
             tipo: "error",
