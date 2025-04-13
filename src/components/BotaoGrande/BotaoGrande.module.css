@@ -1,0 +1,38 @@
+.botao{
+    width: 15rem;
+    padding: .6rem 1rem;
+    border-radius: 7px;
+    border:none;
+    font-size: .9rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+.roxo:hover{
+    transform: scale(1.1);
+    transition: all .7s;
+    background-color: #9433A3;
+}
+.branco:hover{
+    transform: scale(1.1);
+    transition: all .7s;
+    background-color: #ebebeb;
+}
+.branco{
+    background-color: #ffff;
+    color:var(--primary-color);
+    border: solid var(--primary-color) .1rem
+}
+.roxo{
+    background-color: var(--primary-color);
+    color:#ffff;
+}
+.inativoBranco{
+    background-color: #CCCACC;
+    color:#898989;
+    cursor:not-allowed
+}
+.inativoRoxo{
+    background-color: #A36AAC;
+    color: #CDCDCD;
+    cursor:not-allowed
+}

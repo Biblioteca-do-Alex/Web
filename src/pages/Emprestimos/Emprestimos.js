@@ -29,12 +29,14 @@ function Emprestimos({ usuario }) {
             : [...prev, data]
         );
       }
-    } catch {
-      setAlerta({
-        tipo: "error",
-        mensagem: "Erro ao buscar livro",
-        tempo: 3000,
-      });
+    } catch (error) {
+      if (error.response.status != 404) {
+        setAlerta({
+          tipo: "error",
+          mensagem: "Erro ao buscar livro",
+          tempo: 3000,
+        });
+      }
     }
   };
 
@@ -50,12 +52,14 @@ function Emprestimos({ usuario }) {
         );
         fetchLivro(exemplar.ibsn, setLivros);
       }
-    } catch {
-      setAlerta({
-        tipo: "error",
-        mensagem: "Erro ao buscar exemplar",
-        tempo: 3000,
-      });
+    } catch (error) {
+      if (error.response.status != 404) {
+        setAlerta({
+          tipo: "error",
+          mensagem: "Erro ao buscar exemplar",
+          tempo: 3000,
+        });
+      }
     }
   };
 
@@ -72,12 +76,14 @@ function Emprestimos({ usuario }) {
           )
         );
       }
-    } catch {
-      setAlerta({
-        tipo: "error",
-        mensagem: "Erro ao buscar empréstimos",
-        tempo: 3000,
-      });
+    } catch (error) {
+      if (error.response.status != 404) {
+        setAlerta({
+          tipo: "error",
+          mensagem: "Erro ao buscar empréstimos",
+          tempo: 3000,
+        });
+      }
     }
   };
 
@@ -94,12 +100,14 @@ function Emprestimos({ usuario }) {
           )
         );
       }
-    } catch {
-      setAlerta({
-        tipo: "error",
-        mensagem: "Erro ao buscar reservas",
-        tempo: 3000,
-      });
+    } catch (error) {
+      if (error.response.status != 404) {
+        setAlerta({
+          tipo: "error",
+          mensagem: "Erro ao buscar reservas",
+          tempo: 3000,
+        });
+      }
     }
   };
 
@@ -124,27 +132,40 @@ function Emprestimos({ usuario }) {
 
   function retorno() {
     if (busca === "") {
-      return (
-        <>
-          {emprestimos.length > 0 && (
-            <GrupoLivros
-              titulo="Meus livros emprestados"
-              livros={livrosEmprestimos}
-            />
-          )}
-          {reservas.length > 0 && (
-            <GrupoLivros
-              titulo="Meus livros reservados"
-              livros={livrosReservas}
-            />
-          )}
-        </>
-      );
+      if (livrosEmprestimos.length > 0 || livrosReservas.length > 0) {
+        return (
+          <>
+            {livrosEmprestimos.length > 0 && (
+              <GrupoLivros
+                titulo="Meus livros emprestados"
+                livros={livrosEmprestimos}
+                usuario={usuario}
+              />
+            )}
+            {livrosReservas.length > 0 && (
+              <GrupoLivros
+                titulo="Meus livros reservados"
+                livros={livrosReservas}
+                usuario={usuario}
+              />
+            )}
+          </>
+        );
+      } else {
+        return (
+          <GrupoLivros
+            mensagem="Você ainda não tem nenhum empréstimo ou reserva :("
+            livros={[]}
+            usuario={usuario}
+          />
+        );
+      }
     } else {
-      const livrosFiltrados = livrosGeral.filter((livro) =>
-        [livro.titulo, livro.autor, livro.colecao].some((campo) =>
-          campo?.toLowerCase().includes(busca.toLowerCase())
-        )
+      const livrosFiltrados = livrosGeral.filter(
+        (livro) =>
+          livro.titulo?.toLowerCase().includes(busca.toLowerCase()) ||
+          livro.autor?.toLowerCase().includes(busca.toLowerCase()) ||
+          livro.colecao?.toLowerCase().includes(busca.toLowerCase())
       );
 
       return (
@@ -156,6 +177,7 @@ function Emprestimos({ usuario }) {
               : ""
           }
           livros={livrosFiltrados}
+          usuario={usuario}
         />
       );
     }

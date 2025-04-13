@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+  gap: .3rem;
+}
+.status {
+    padding: .7rem 1.2rem;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size:100% ;
+    text-align: center;
+    color: #ffff;
+}
+.mensagem {
+  font-size: 0.7rem;
+}
+.azul{
+background-color: #627EB4;
+}
+.verde{
+background-color: #68B462;
+}
+.amarelo{
+background-color: #B89E5B;
+}
+.vermelho{
+background-color: #A94141;
+}

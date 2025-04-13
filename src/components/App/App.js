@@ -1,4 +1,3 @@
-import styles from "./App.module.css";
 import Header from "../Header/Header";
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -8,6 +7,7 @@ import Livros from "../../pages/Cadastros/Livros/Livros";
 import Exemplares from "../../pages/Cadastros/Exemplares/Exemplares";
 import Login from "../../pages/Login/Login";
 import DetalheLivro from "../../pages/DetalheLivro/DetalheLivro";
+import DetalheLivroAdmin from "../../pages/DetalheLivroAdmin/DetalheLivroAdmin";
 import Usuario from "../../pages/Cadastros/Usuario/Usuario";
 import { Navigate } from "react-router-dom";
 
@@ -24,18 +24,37 @@ function App() {
   if (logado) {
     return (
       <Router>
-        <Header admin={admin} setLogado={setLogado} usuario={usuario} />
+        <Header
+          admin={admin}
+          setLogado={setLogado}
+          usuario={usuario}
+          setUsuario={setUsuario}
+        />
         <Routes>
           <Route path="/login" element={<Navigate to="/" replace />} />
           <Route
             path="/cadastros/usuario"
             element={<Navigate to="/" replace />}
           />
-          <Route path="/" admin={admin} element={<Catalogo />} />
-          <Route path="/emprestimos" element={<Emprestimos usuario={usuario} />} />
+          <Route
+            path="/"
+            admin={admin}
+            element={<Catalogo usuario={usuario} />}
+          />
+          <Route
+            path="/emprestimos"
+            element={<Emprestimos usuario={usuario} />}
+          />
           <Route path="/cadastros/livros" element={<Livros />} />
           <Route path="/cadastros/exemplares" element={<Exemplares />} />
-          <Route path="/livro/:id" element={<DetalheLivro />} />
+          <Route
+            path="/livro/:ibsn"
+            element={<DetalheLivro usuario={usuario} />}
+          />
+          <Route
+            path="/livroAdmin/:ibsn"
+            element={<DetalheLivroAdmin usuario={usuario} />}
+          />
         </Routes>
       </Router>
     );

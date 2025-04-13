@@ -133,7 +133,7 @@ function Exemplares(props) {
                 {livros
                   .sort((a, b) => a.titulo.localeCompare(b.titulo))
                   .map((livro) => (
-                    <option value={livro.id}>{livro.titulo}</option>
+                    <option value={livro.ibsn}>{livro.titulo}</option>
                   ))}
               </select>
             </div>
@@ -147,9 +147,8 @@ function Exemplares(props) {
                   setStatus(e.target.value);
                 }}
               >
-                <option value="0">Disponível</option>
-                <option value="1">Reservado</option>
-                <option value="2">Emprestado</option>
+                <option value="Disponível">Disponível</option>
+                <option value="Indisponível">Indisponível</option>
               </select>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import styles from "./Login.module.css";
 import BotaoMedio from "../../components/BotaoMedio/BotaoMedio";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import olhoFechado from "../../assets/olho-fechado.svg";
 import olhoAberto from "../../assets/olho-aberto.svg";
 import validacoes from "../../utils/validacao";
@@ -34,6 +34,7 @@ function Login(props) {
         setErroEmail(false);
       }, 6000);
       setAlerta({ mensagem: "Digite o e-mail", tempo: 4000 });
+      setCarregar(false);
       valido = false;
     } else if (validacoes.validarEmail(email) == false) {
       setErroEmail(true);
@@ -44,6 +45,7 @@ function Login(props) {
         mensagem: "Digite um e-mail válido",
         tempo: 4000,
       });
+      setCarregar(false);
       valido = false;
     } else {
       setErroEmail(false);
@@ -55,6 +57,7 @@ function Login(props) {
         setErroSenha(false);
       }, 6000);
       setAlerta({ mensagem: "Digite a senha", tempo: 4000 });
+      setCarregar(false);
       valido = false;
     } else if (senha.length <= 4) {
       setErroSenha(true);
@@ -65,6 +68,7 @@ function Login(props) {
         mensagem: "Senha muito curta, ela deve ter pelo menos 5 caracteres",
         tempo: 5000,
       });
+      setCarregar(false);
       valido = false;
     } else {
       setErroSenha(false);
@@ -87,10 +91,13 @@ function Login(props) {
             if (data.role == "ADMIN") {
               props.setTituloPagina("Biblioteca do Alex Admin");
               props.setAdmin(true);
+            } else {
+              props.setAdmin(false);
             }
             setTimeout(() => {
               props.setLogado(true);
               props.setUsuario(data);
+              console.log(data);
             }, 1000);
           } else {
             setAlerta({
@@ -142,6 +149,11 @@ function Login(props) {
               id="senha"
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
+              onKeyUp={(e) => {
+                if (e.key === "Enter") {
+                  validaDados();
+                }
+              }}
             />
             <img
               className={styles.olho}

@@ -131,6 +131,7 @@ function Usuario(props) {
             email: email,
             senha: senha,
           };
+          console.log(usuario)
           const data = await userService.postSalvar(usuario);
           setCarregar(false);
           if (data != null) {
@@ -230,8 +231,14 @@ function Usuario(props) {
             type="text"
             name="senha"
             id="senha"
+            minLength="6"
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
+            onKeyUp={(e) => {
+              if (e.key === "Enter") {
+                validaDados();
+              }
+            }}
           />
         </div>
         <BotaoMedio texto="Cadastrar" onClick={validaDados} />

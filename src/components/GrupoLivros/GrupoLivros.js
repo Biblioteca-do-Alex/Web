@@ -7,10 +7,7 @@ function GrupoLivros(props) {
         <h2>{props.titulo}</h2>
         <div className={styles.livrosDiv}>
           {props.livros.map((livro) => (
-            <LivroIcone
-              key={livro.id}
-              livro={livro}
-            />
+            <LivroIcone key={livro.id} livro={livro} usuario={props.usuario} />
           ))}
         </div>
       </>
