@@ -26,9 +26,24 @@ function Header(props) {
     navigate(pagina);
     setMostrarDropdown(false);
   }
-
+  function emprestimo() {
+    if (props.usuario.role == "ADMIN") {
+      return <></>;
+    } else {
+      return (
+        <p
+          className={`${styles.textoHeader} ${
+            selecionado === "Empréstimos" ? styles.selecionado : ""
+          }`}
+          onClick={() => mudarSelecao("Empréstimos")}
+        >
+          Empréstimos
+        </p>
+      );
+    }
+  }
   function admin() {
-    if (props.admin) {
+    if (props.usuario.role == "ADMIN") {
       return (
         <div className={styles.containerDropdown} ref={dropdownRef}>
           <p
@@ -100,32 +115,28 @@ function Header(props) {
           >
             Livros
           </p>
-          <p
-            className={`${styles.textoHeader} ${
-              selecionado === "Empréstimos" ? styles.selecionado : ""
-            }`}
-            onClick={() => mudarSelecao("Empréstimos")}
-          >
-            Empréstimos
-          </p>
+          {emprestimo()}
           {admin()}
         </div>
         <div className={styles.containerFinal}>
-        <p className={styles.nome}>{props.usuario ? props.usuario.nome : "Sem nome"}</p>
-        <img
-          className={styles.gato}
-          src={fotoGato}
-          alt=""
-          onClick={() => {
-            const logout = window.confirm("Deseja fazer logout?");
-            if (logout) {
-              props.setLogado(false);
-              navegarPara("/");
-            } else {
-              window.open(fotoGato, "_blank");
-            }
-          }}
-        />
+          <p className={styles.nome}>
+            {props.usuario ? props.usuario.nome : "Sem nome"}
+          </p>
+          <img
+            className={styles.gato}
+            src={fotoGato}
+            alt=""
+            onClick={() => {
+              const logout = window.confirm("Deseja fazer logout?");
+              if (logout) {
+                props.setLogado(false);
+                props.setUsuario();
+                navegarPara("/");
+              } else {
+                window.open(fotoGato, "_blank");
+              }
+            }}
+          />
         </div>
       </header>
     </>

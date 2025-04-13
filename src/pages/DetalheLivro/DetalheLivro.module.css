@@ -1,0 +1,62 @@
+.container {
+  margin: 1.5rem;
+  margin-top: 5rem;
+}
+.editora{
+    font-style: italic;
+    font-weight:350;
+    font-size: .9rem;
+}
+.seta {
+  width: 2.5rem;
+}
+.seta:hover{
+    transform: scale(1.2);
+    transition: all .3s;
+    opacity: 0.9;
+}
+.livro {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+}
+.imagem {
+  width: 25%;
+  object-fit: cover;
+  border-radius: 7px;
+  margin: 0;
+  padding: 0;
+}
+.infos {
+  display: flex;
+  gap: 2rem;
+}
+.autor {
+  font-style: italic;
+}
+.status {
+  display: flex;
+  width: 90%;
+  justify-content: end;
+  position: absolute;
+  z-index: 999;
+  top: 7rem;
+  right: 9rem;
+}
+.textos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 100%;
+}
+.botoes {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.descricao {
+  width: 72%;
+  overflow-wrap: break-word;
+}

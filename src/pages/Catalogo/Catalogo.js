@@ -8,7 +8,7 @@ import livroService from "../../services/livroService";
 import Alerta from "../../components/Alerta/Alerta";
 import Loading from "../../components/Loading/Loading";
 
-function Catalogo() {
+function Catalogo(props) {
   const [busca, setBusca] = useState("");
   const [generos, setGeneros] = useState([]);
   const [catalogo, setCatalogo] = useState([]);
@@ -71,6 +71,7 @@ function Catalogo() {
               key={genero.id}
               titulo={genero.nome}
               livros={catalogo.filter((livro) => livro.genero == genero.id)}
+              usuario={props.usuario}
             />
           ))}
         </>
@@ -87,6 +88,7 @@ function Catalogo() {
                 livro.autor.toLowerCase().includes(busca.toLowerCase()) ||
                 livro.colecao.toLowerCase().includes(busca.toLowerCase())
             )}
+            usuario={props.usuario}
           />
         </>
       );

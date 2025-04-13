@@ -15,7 +15,7 @@ function Livros(props) {
   const [erroTitulo, setErroTitulo] = useState(false);
   const [descricao, setDescricao] = useState("");
   const [erroDescricao, setErroDescricao] = useState(false);
-  const [volume, setVolume] = useState("");
+  const [volume, setVolume] = useState(null);
   const [erroVolume, setErroVolume] = useState(false);
   const [colecao, setColecao] = useState("");
   const [erroColecao, setErroColecao] = useState(false);
@@ -362,6 +362,11 @@ function Livros(props) {
                 value={imagem}
                 onChange={(e) => {
                   setImagem(e.target.value);
+                }}
+                onKeyUp={(e) => {
+                  if (e.key === "Enter") {
+                    criarLivro();
+                  }
                 }}
               />
             </div>

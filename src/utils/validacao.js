@@ -5,7 +5,7 @@ const validacoes = {
   },
   formatarTelefone(numero) {
     if (!numero || numero.length !== 11) {
-        return "Número inválido";
+      return "Número inválido";
     }
 
     const ddd = numero.slice(0, 2);
@@ -13,8 +13,12 @@ const validacoes = {
     const parte2 = numero.slice(7);
 
     return `(${ddd}) ${parte1}-${parte2}`;
-  }
-}
-
+  },
+  formatarData(dataISO) {
+    if (!dataISO) return "";
+    const [ano, mes, dia] = dataISO.split("-");
+    return `${dia}/${mes}/${ano}`;
+  },
+};
 
 export default validacoes;
